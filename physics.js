@@ -106,6 +106,7 @@ let sketch = function(p) {
         positionData = [];
         velocityData = [];
         timeData = [];
+        isSimulating = false;
         
         // Reset UI
         if (document.getElementById('position')) {
@@ -120,6 +121,9 @@ let sketch = function(p) {
         }
     }
     
+    // Make resetSimulation accessible globally
+    window.resetSimulation = resetSimulation;
+    
     // Update physics parameters from UI
     window.updatePhysicsParams = function(params) {
         console.log('Updating physics params:', params);
@@ -133,9 +137,6 @@ let sketch = function(p) {
     window.toggleSimulation = function() {
         console.log('Toggling simulation. Current state:', isSimulating);
         isSimulating = !isSimulating;
-        if (!isSimulating) {
-            resetSimulation();
-        }
     };
 };
 

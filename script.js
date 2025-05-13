@@ -219,10 +219,10 @@ function initializeEventListeners() {
         
         resetButton.addEventListener('click', function() {
             console.log('Reset button clicked');
-            if (window.toggleSimulation) {
-                window.toggleSimulation();
+            if (window.resetSimulation) {
+                window.resetSimulation();
                 document.getElementById('play-button').textContent = 'Play';
-                updatePhysicsParams();
+                isSimulating = false;
             }
         });
         
@@ -235,10 +235,32 @@ function initializeEventListeners() {
     }
 }
 
+// Modal functionality
+function initializeModal() {
+    const modal = document.getElementById('info-modal');
+    const btn = document.getElementById('info-button');
+    const span = document.getElementsByClassName('close-button')[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 // Initialize everything when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing application...');
     initializeCharts();
     initializeEventListeners();
+    initializeModal();
     updatePhysicsParams();
 }); 
